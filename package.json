@@ -1,17 +1,17 @@
 {
-  "name": "bundlr-teste",
-  "version": "1.0.0",
-  "description": "",
+  "name": "bundlr-recipe-devserver",
+  "version": "0.0.1",
+  "description": "Bundlr recipe for webpack devserver",
+  "license": "MIT",
+  "author": "João Neto <joaopintoneto@gmail.com>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bundlr devserver 9000 --recipes-dir=./recipes",
+    "start": "bundlr devserver 9000 --scope=development",
     "help": "bundlr devserver --help"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "commander": "^2.15.1",
-    "glob": "^7.1.2"
+    "glob": "^7.1.2",
+    "webpack-dev-server": "^3.1.3"
   }
 }

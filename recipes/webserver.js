@@ -1,16 +1,22 @@
-// const path = require('path');
-
 const command = {
-  command: 'devserver [proxy]',
-  describe: 'start the dev server',
+  command: 'devserver [port]',
+  describe: 'starts the webpack dev server',
   builder: {
     port: {
-      describe: 'port to bind on'
-    }
+      describe: 'port to bind on',
+      default: 8080
+    },
+    inline: {
+      describe: 'inline',
+      default: true
+    },
+    'content-base': {
+      describe: 'content base',
+      default: './app'
+    },
   },
   handler: (argv) => {
-    console.log('aquiii');
-    if (argv.verbose) console.info(`start server on :${argv.port}`);
+    if (argv.verbose) console.info(`start server on localhost:${argv.port}`);
   }
 };
 
@@ -24,4 +30,15 @@ module.exports.recipe = {
   command
 };
 
-module.exports.webpackConfig = {};
+module.exports.webpackConfig = function (argv) {
+  return {
+    devServer: {
+      historyApiFallback: true,
+      stats: 'minimal',
+      port: argv.port,
+      inline: argv.inline,
+      contentBase: argv['content-base'],
+      watchOptions: { aggregateTimeout: 300, poll: 1000 },
+    }
+  }
+};
