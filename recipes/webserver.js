@@ -1,23 +1,24 @@
-const path = require('path');
-const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+// const path = require('path');
 
-const command = function (cli) {
-  cli.command('devserver [port]', 'start the dev server', (yargs) => {
-    yargs
-      .positional('port', {
-        describe: 'port to bind on',
-        default: 5000
-      })
-  }, (argv) => {
+const command = {
+  command: 'devserver [proxy]',
+  describe: 'start the dev server',
+  builder: {
+    port: {
+      describe: 'port to bind on'
+    }
+  },
+  handler: (argv) => {
+    console.log('aquiii');
     if (argv.verbose) console.info(`start server on :${argv.port}`);
-  });
+  }
 };
 
 module.exports.recipe = {
   name: 'devserver',
   version: '0.0.1',
-  description: 'Core bundlr recipe',
+  description: 'Webpack Dev Server',
+  scope: 'development',
   dependencies: {
   },
   command

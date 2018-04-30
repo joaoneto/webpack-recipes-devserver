@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bundlr --help"
+    "start": "bundlr devserver 9000 --recipes-dir=./recipes",
+    "help": "bundlr devserver --help"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.15.1",
     "glob": "^7.1.2"
   }
 }
