@@ -1,5 +1,6 @@
 const path = require('path');
-// https://github.com/webpack/memory-fs
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports.recipe = {
   name: 'test-app',
   version: '0.0.1',
@@ -21,5 +22,13 @@ module.exports.webpackConfig = function (argv) {
       filename: 'assets/js/[name].[hash:8].js',
       chunkFilename: 'assets/js/[id].[hash:8].chunk.js'
     },
+
+    plugins: [
+      new HtmlWebpackPlugin({
+        chunks: ['test-app'],
+        template: './index.html'
+      }),
+    ],
+
   }
 };

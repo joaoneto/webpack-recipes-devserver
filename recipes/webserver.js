@@ -1,3 +1,6 @@
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server/lib/Server');
+
 const command = {
   command: 'devserver [port]',
   describe: 'starts the webpack dev server',
@@ -27,11 +30,24 @@ module.exports.recipe = {
   scope: 'development',
   dependencies: {
   },
-  command
+  command,
+  hooks: {
+    before: () => {},
+    after: (webpackConfig) => {
+      const compiler = webpack(webpackConfig);
+      const devServerOptions = webpackConfig.devServer;
+      const server = new WebpackDevServer(compiler, devServerOptions);
+      server.listen(devServerOptions.port, '127.0.0.1', () => {
+        console.log(`Starting server on http://localhost:${devServerOptions.port}`);
+      });
+    }
+  }
 };
 
 module.exports.webpackConfig = function (argv) {
   return {
+    mode: 'development',
+
     devServer: {
       historyApiFallback: true,
       stats: 'minimal',
@@ -39,6 +55,6 @@ module.exports.webpackConfig = function (argv) {
       inline: argv.inline,
       contentBase: argv['content-base'],
       watchOptions: { aggregateTimeout: 300, poll: 1000 },
-    }
+    },
   }
 };
