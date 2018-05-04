@@ -1,14 +1,13 @@
 {
-  "name": "bundlr-recipe-devserver",
+  "name": "webpack-recipes-devserver",
   "version": "0.0.1",
-  "description": "Bundlr recipe for webpack devserver",
+  "description": "Webpack Recipes for webpack devserver",
   "license": "MIT",
   "author": "João Neto <joaopintoneto@gmail.com>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bundlr devserver 9000 --scope=development",
-    "help": "bundlr devserver --help"
+    "start": "webpack-recipes devserver 9000 --scope=development",
+    "help": "webpack-recipes devserver --help"
   },
   "dependencies": {
     "glob": "^7.1.2",
