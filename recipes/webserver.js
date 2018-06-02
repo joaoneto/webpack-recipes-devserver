@@ -18,8 +18,13 @@ const command = {
       default: './app'
     },
   },
-  handler: (argv) => {
-    if (argv.verbose) console.info(`start server on localhost:${argv.port}`);
+  handler: (argv, webpackConfig) => {
+    const compiler = webpack(webpackConfig);
+    const devServerOptions = webpackConfig.devServer;
+    const server = new WebpackDevServer(compiler, devServerOptions);
+    server.listen(devServerOptions.port, '127.0.0.1', () => {
+      console.log(`Starting server on http://localhost:${devServerOptions.port}`);
+    });
   }
 };
 
@@ -27,21 +32,7 @@ module.exports.recipe = {
   name: 'devserver',
   version: '0.0.1',
   description: 'Webpack Dev Server',
-  scope: 'development',
-  dependencies: {
-  },
-  command,
-  hooks: {
-    before: () => {},
-    after: (webpackConfig) => {
-      const compiler = webpack(webpackConfig);
-      const devServerOptions = webpackConfig.devServer;
-      const server = new WebpackDevServer(compiler, devServerOptions);
-      server.listen(devServerOptions.port, '127.0.0.1', () => {
-        console.log(`Starting server on http://localhost:${devServerOptions.port}`);
-      });
-    }
-  }
+  command
 };
 
 module.exports.webpackConfig = function (argv) {
